@@ -109,3 +109,6 @@ site/
 
 # vscode extension - local history
 .history/
+
+# development stuff
+Chinook.sqlite
