@@ -11,24 +11,6 @@ class MyVanna(ChromaDB_VectorStore, Ollama):
         Ollama.__init__(self, config=config)
 
 
-def train_on_information_schema(vn):
-    """
-    Trains the Vanna instance on the information schema of the connected database.
-
-    Parameters:
-    vn (Vanna instance): The Vanna instance to train.
-
-    Returns:
-    None
-    """
-    # The information schema query may need some tweaking depending on your database. This is a good starting point.
-    df_information_schema = vn.run_sql("SELECT * FROM INFORMATION_SCHEMA.COLUMNS")
-
-    # This will break up the information schema into bite-sized chunks that can be referenced by the LLM
-    plan = vn.get_training_plan_generic(df_information_schema)
-    return plan
-
-
 def start_app(duckdb_path, model="duckdb-nsql"):
     """
     Starts the Vanna application with the specified configuration.
@@ -43,10 +25,6 @@ def start_app(duckdb_path, model="duckdb-nsql"):
     vn = MyVanna(config={"model": model})
 
     vn.connect_to_duckdb(url=duckdb_path)
-
-    # train on information schema
-    training_plan = train_on_information_schema(vn)
-    vn.train(plan=training_plan)
 
     app = VannaFlaskApp(
         vn,

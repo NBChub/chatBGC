@@ -1,0 +1,10 @@
+CREATE TABLE taxa(tax_id VARCHAR, "domain" VARCHAR, phylum VARCHAR, "class" VARCHAR, taxonomic_order VARCHAR, "family" VARCHAR, genus VARCHAR, species VARCHAR);
+CREATE TABLE seqfu(genome_id VARCHAR, s_min BIGINT, s_n25 BIGINT, s_n50 BIGINT, s_aun DOUBLE, s_gc DOUBLE, s_max BIGINT, s_n75 BIGINT, s_count BIGINT, s_total BIGINT, s_n90 BIGINT, s_avg DOUBLE);
+CREATE TABLE cdss(cds_id VARCHAR, region_id VARCHAR, locus_tag VARCHAR, product VARCHAR, gene_function VARCHAR[], "name" VARCHAR, translation VARCHAR, "'location'" VARCHAR, gene_kind VARCHAR, codon_start VARCHAR, EC_number VARCHAR);
+CREATE TABLE bigscape_cluster(bgc_id VARCHAR, genome_id VARCHAR, product VARCHAR, bigscape_class VARCHAR, accn_id VARCHAR, gcf BIGINT, fam_id BIGINT, fam_type VARCHAR, fam_known_compounds VARCHAR);
+CREATE TABLE bigscape_network(bigscape_edge_id BIGINT, clustername_1 VARCHAR, clustername_2 VARCHAR, raw_distance DOUBLE, squared_similarity DOUBLE, jaccard_index DOUBLE, dss_index DOUBLE, adjacency_index DOUBLE, raw_DSS_non_anchor DOUBLE, raw_DSS_anchor DOUBLE, non_anchor_domains BIGINT, anchor_domains BIGINT, combined_group VARCHAR, shared_group VARCHAR);
+CREATE TABLE checkm(genome_id VARCHAR, completeness DOUBLE, contamination DOUBLE, num_ambiguous_bases BIGINT, coding_density DOUBLE, num_predicted_genes BIGINT);
+CREATE TABLE dna_sequences(sequence_id VARCHAR, accessions VARCHAR, genome_id VARCHAR, description VARCHAR, molecule_type VARCHAR, topology VARCHAR, seq VARCHAR);
+CREATE TABLE mibig_hits(bgc_id VARCHAR, product VARCHAR, bigscape_class VARCHAR, biosyn_class VARCHAR, compounds VARCHAR, chem_acts VARCHAR, accession VARCHAR, completeness VARCHAR, organism_name VARCHAR, ncbi_tax_id BIGINT, publications VARCHAR, evidence VARCHAR);
+CREATE TABLE regions(region_id VARCHAR, genome_id VARCHAR, region DOUBLE, accession VARCHAR, start_pos BIGINT, end_pos BIGINT, contig_edge BOOLEAN, product VARCHAR, region_length BIGINT);
+CREATE TABLE genomes(genome_id VARCHAR, tax_id VARCHAR, source VARCHAR, strain DOUBLE);

@@ -52,10 +52,16 @@ Follow these steps to install and run chatBGC:
 
 ## Usage
 
+Before running the chatBGC app, run the training using the given database first. You need to only do this once.
+
+```bash
+chatbgc train <path_to_duckdb>
+```
+
 To start the chatBGC tool, use the following command:
 
 ```bash
-chatbgc run --duckdb_path <path_to_duckdb> --model <model>
+chatbgc run <path_to_duckdb>
 ```
 
 ## Credits
