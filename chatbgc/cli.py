@@ -1,3 +1,5 @@
+# cli.py
+
 """Console script for chatbgc."""
 
 import fire
@@ -24,20 +26,20 @@ class CLI(object):
         """
         pass
 
-    def run(self, email, sqlite_path="https://vanna.ai/Chinook.sqlite"):
+    def run(self, duckdb_path, model="duckdb-nsql"):
         """
         Starts the chatBGC interface using the vanna.ai library.
 
-        The run method is used to start the chatBGC tool. It connects to a SQLite database using the vanna.ai library and starts a Flask app.
+        The run method is used to start the chatBGC tool. It connects to a DuckDB database using the vanna.ai library and starts a Flask app.
 
         Parameters:
-            email (str): The email to use for retrieving the API key from vanna.ai.
-            sqlite_path (str, optional): The URL or path to the SQLite database. Defaults to 'https://vanna.ai/Chinook.sqlite'.
+            duckdb_path (str): The path to the DuckDB database.
+            model (str, optional): The model to use. Defaults to 'duckdb-nsql'.
 
         Returns:
             None
         """
-        start_app(email, sqlite_path=sqlite_path)
+        start_app(duckdb_path, model=model)
 
 
 def main():
