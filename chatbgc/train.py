@@ -1,14 +1,15 @@
 import logging
+import os
 from pathlib import Path
 
-from .app import MyVanna
+from .app import MyVannaOllama, MyVannaOpenAI
 
 
 def train_model(
     duckdb_path,
     training_folder=str((Path(__file__).parent / "data").resolve()),
     model="duckdb-nsql",
-    vn=MyVanna,
+    llm_type="ollama",
 ):
     """
     Trains the Vanna instance on the information schema of the connected database and on the DDL and documentation files in the specified training folder.
@@ -24,7 +25,26 @@ def train_model(
     """
     logging.info("Starting training...")
 
-    vn = MyVanna(config={"model": model})
+    if llm_type not in ["ollama", "openai_chat"]:
+        raise ValueError(f"Invalid LLM type: {llm_type}")
+
+    config = {"model": model}
+
+    if llm_type == "openai_chat":
+        openai_api_key = os.environ.get("OPENAI_API_KEY")
+        if openai_api_key is None:
+            raise ValueError("OPENAI_API_KEY environment variable is not set")
+        config["api_key"] = openai_api_key
+        if model == "duckdb-nsql":
+            model = "gpt-4"
+            config["model"] = model
+        logging.info(f"Using {llm_type} model: {model}")
+        logging.debug(f"OpenAI API key: {openai_api_key}")
+
+    if llm_type == "ollama":
+        vn = MyVannaOllama(config=config)
+    elif llm_type == "openai_chat":
+        vn = MyVannaOpenAI(config=config)
 
     vn.connect_to_duckdb(url=duckdb_path)
 
