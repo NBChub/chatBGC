@@ -57,7 +57,7 @@ def start_app(duckdb_path, model="duckdb-nsql", llm_type="ollama"):
 
     app = VannaFlaskApp(
         vn,
-        logo="https://raw.githubusercontent.com/NBChub/chatBGC/dev-0.1.0/chatbgc/assets/bgcflow_logo.png?token=GHSAT0AAAAAACGXSVJOGS4A3BOZBYMHV5FGZRCB6UQ",
+        logo="https://raw.githubusercontent.com/NBChub/bgcflow/dev-0.9.1-1/workflow/report/images/bgcflow_logo.png",
         title="Welcome to chatBGC",
         subtitle="Your AI-powered copilot for querying smBGCs in your genome collection.",
         show_training_data=False,
