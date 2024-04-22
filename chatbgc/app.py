@@ -47,7 +47,6 @@ def start_app(duckdb_path, model="duckdb-nsql", llm_type="ollama"):
             model = "gpt-4"
             config["model"] = model
         logging.info(f"Using {llm_type} model: {model}")
-        logging.debug(f"OpenAI API key: {openai_api_key}")
 
     if llm_type == "ollama":
         vn = MyVannaOllama(config=config)

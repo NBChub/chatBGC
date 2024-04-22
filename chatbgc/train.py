@@ -1,3 +1,4 @@
+import json
 import logging
 import os
 from pathlib import Path
@@ -39,7 +40,6 @@ def train_model(
             model = "gpt-4"
             config["model"] = model
         logging.info(f"Using {llm_type} model: {model}")
-        logging.debug(f"OpenAI API key: {openai_api_key}")
 
     if llm_type == "ollama":
         vn = MyVannaOllama(config=config)
@@ -59,6 +59,12 @@ def train_model(
                 docs = f.read()
             vn.train(documentation=docs)
             logging.info(f"Trained on documentation file: {file}")
+        elif file.suffix == ".json":
+            with open(file, "r") as f:
+                data = json.load(f)
+            for item in data:
+                vn.train(question=item["question"], sql=item["sql"])
+            logging.info(f"Trained on question-sql pair: {file}")
 
     # Get the information schema query
     df_information_schema = vn.run_sql("SELECT * FROM INFORMATION_SCHEMA.COLUMNS")
