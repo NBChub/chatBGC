@@ -20,13 +20,36 @@ Ask questions about biosynthetic gene clusters in your genome dataset via LLMs u
 
 * Free software: MIT
 * Documentation: <https://nbchub.github.io/chatBGC/>
+
+## Configuration
+
+Before running chatBGC, you need to configure the language model platform you want to use: `Ollama` or `OpenAI Chat`.
+
+### Ollama
+
+If you're using Ollama, make sure you have it running as described in the Installation section.
+
+### OpenAI Chat
+
+If you're using OpenAI Chat, you need to set up an API key:
+
+1. Sign up for an account on the [OpenAI website](https://www.openai.com/).
+2. Navigate to the [API section](https://platform.openai.com/api-keys) and generate a new API key.
+3. Set the API key as an environment variable on your system:
+
+    ```bash
+    export OPENAI_API_KEY="your-api-key"
+    ```
+
+Replace `"your-api-key"` with the API key you generated on the OpenAI website.
+
 ## Installation
 
 Follow these steps to install and run chatBGC:
 
-1. **Set up Ollama**
+1. **Set up Ollama (Skip this step if you are using `OpenAI Chat`)**
 
-    [Ollama](https://ollama.com/) is a prerequisite for chatBGC. If you haven't installed it yet, you can do so using Docker:
+    [Ollama](https://ollama.com/) is the default prerequisite for chatBGC. If you haven't installed it yet, you can do so using Docker:
 
     ```bash
     docker stop ollama
