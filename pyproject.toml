@@ -2,8 +2,8 @@
 [tool.poetry]
 name = "chatbgc"
 version = "0.1.1"
-homepage = "https://github.com/matinnuhamunada/chatbgc"
-description = "Ask questions about biosynthetic gene clusters in your genome collection via LLMs usin."
+homepage = "https://github.com/NBChub/chatBGC"
+description = "Ask questions about biosynthetic gene clusters in your genome collection via LLMs using RAG."
 authors = ["Matin Nuhamunada <matinnu@biosustain.dtu.dk>"]
 readme = "README.md"
 license =  "MIT"
@@ -24,7 +24,8 @@ packages = [
 include = [
     "chatbgc/data/*.sql",
     "chatbgc/data/*.md",
-    "chatBGC/assets/*.png"
+    "chatbgc/data/*.json",
+    "chatbgc/assets/*.png",
 ]
 
 [tool.poetry.dependencies]
@@ -116,8 +117,3 @@ exclude = '''
 '''
 [tool.isort]
 profile = "black"
-
-[[tool.poetry.source]]
-name = "pypi-public"
-url = "https://pypi.org/simple/"
-priority = "primary"
