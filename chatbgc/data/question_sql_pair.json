@@ -1,0 +1,14 @@
+[
+    {
+        "question": "How many gene cluster families are in the dataset?",
+        "sql": "SELECT COUNT(DISTINCT gcf) FROM bigscape_cluster;"
+    },
+    {
+        "question": "What is the average genome completeness for genomes with a contamination less than 5%?",
+        "sql": "SELECT AVG(completeness) FROM checkm WHERE contamination < 0.05;"
+    },
+    {
+        "question": "List all distinct BGC types in the dataset.",
+        "sql": "SELECT DISTINCT product from regions;"
+    }
+]
