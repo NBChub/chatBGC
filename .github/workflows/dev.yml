@@ -99,7 +99,7 @@ jobs:
           poetry run mkdocs build
           git config --global user.name Docs deploy
           git config --global user.email docs@dummy.bot.com
-          mike deploy -p -f --ignore "`poetry version --short`.dev"
+          mike deploy -p --ignore "`poetry version --short`.dev"
           mike set-default -p "`poetry version --short`.dev"
 
       - name: Build wheels and source tarball
