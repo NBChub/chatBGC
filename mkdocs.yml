@@ -58,8 +58,13 @@ plugins:
   - search:
       lang: en
   - mkdocstrings:
-      watch:
-        - chatbgc
+      default_handler: python
+      handlers:
+        python:
+          options:
+            show_source: false
+          paths:
+            - chatbgc
 extra:
   version:
     provider: mike
