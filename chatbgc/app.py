@@ -80,12 +80,13 @@ def start_app(duckdb_path, model="llama3", llm_type="ollama"):
         suggested_questions=False,
         sql=True,
         table=True,
-        csv_download=False,
+        csv_download=True,
         chart=True,
         redraw_chart=False,
         auto_fix_sql=True,
-        ask_results_correct=False,
+        ask_results_correct=True,
         followup_questions=True,
-        summarization=False,
+        summarization=True,
+        allow_llm_to_see_data=True,
     )
     app.run()
