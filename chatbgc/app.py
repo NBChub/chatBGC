@@ -3,6 +3,7 @@
 import logging
 import os
 
+import requests
 from vanna.chromadb import ChromaDB_VectorStore
 from vanna.flask import VannaFlaskApp
 from vanna.ollama import Ollama
@@ -21,13 +22,13 @@ class MyVannaOpenAI(ChromaDB_VectorStore, OpenAI_Chat):
         OpenAI_Chat.__init__(self, config=config)
 
 
-def start_app(duckdb_path, model="duckdb-nsql", llm_type="ollama"):
+def start_app(duckdb_path, model="llama3", llm_type="ollama"):
     """
     Starts the Vanna application with the specified configuration.
 
     Parameters:
     duckdb_path (str): The path to the DuckDB database.
-    model (str, optional): The model to use. Defaults to "duckdb-nsql" for "ollama" and "gpt-4" for "openai_chat".
+    model (str, optional): The model to use. Defaults to "llama3" for "ollama" and "gpt-4o" for "openai_chat".
     llm_type (str, optional): The type of language model to use. Defaults to "ollama". Other option is "openai_chat".
 
     Returns:
@@ -39,13 +40,28 @@ def start_app(duckdb_path, model="duckdb-nsql", llm_type="ollama"):
     config = {"model": model}
 
     if llm_type == "openai_chat":
+
+        # change default model
+        if model == "llama3":
+            model = "gpt-4o"
+            config["model"] = model
+
         openai_api_key = os.environ.get("OPENAI_API_KEY")
         if openai_api_key is None:
             raise ValueError("OPENAI_API_KEY environment variable is not set")
         config["api_key"] = openai_api_key
-        if model == "duckdb-nsql":
-            model = "gpt-4"
-            config["model"] = model
+
+        # get available models
+        response = requests.get(
+            "https://api.openai.com/v1/models",
+            headers={"Authorization": f"Bearer {os.getenv('OPENAI_API_KEY')}"},
+        )
+
+        response.raise_for_status()
+        available_models = [model["id"] for model in response.json()["data"]]
+        if model not in available_models:
+            raise ValueError(f"Invalid model. Expected one of: {available_models}")
+
         logging.info(f"Using {llm_type} model: {model}")
 
     if llm_type == "ollama":

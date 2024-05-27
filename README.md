@@ -74,17 +74,32 @@ Follow these steps to install and run chatBGC:
 * Connects to a DuckDB database using the vanna.ai library and starts a Flask app.
 
 ## Usage
+### Step 1 - Training
 
 Before running the chatBGC app, run the training using the given database first. You need to only do this once.
 
+- **Train using Ollama**: To train chatBGC tool with default settings, use the following command:
 ```bash
 chatbgc train <path_to_duckdb>
 ```
 
-To start the chatBGC tool, use the following command:
+- **Train using OpenAI chat**: To train the chatBGC tool using OpenAI chat with GPT-4o, use the following command:
+
+```bash
+chatbgc train --llm_type openai_chat <path_to_duckdb>
+```
+
+### Step 2 - Run chatBGC
+- **Run using Ollama**: To run the chatBGC tool with default settings, use the following command:
 
 ```bash
 chatbgc run <path_to_duckdb>
+```
+
+- **Run using OpenAI chat**: To start the chatBGC tool using OpenAI chat with GPT-4o, use the following command:
+
+```bash
+chatbgc run --llm_type openai_chat <path_to_duckdb>
 ```
 
 ## Credits
