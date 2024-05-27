@@ -113,3 +113,4 @@ site/
 # development stuff
 Chinook.sqlite
 chroma.sqlite3
+notebooks

@@ -3,6 +3,7 @@
 """Console script for chatbgc."""
 
 import logging
+import sys
 from pathlib import Path
 
 import fire
@@ -35,7 +36,7 @@ class CLI(object):
         """
         pass
 
-    def run(self, duckdb_path, model="duckdb-nsql", llm_type="ollama"):
+    def run(self, duckdb_path, model="llama3", llm_type="ollama"):
         """
         Starts the chatBGC interface using the vanna.ai library.
 
@@ -43,7 +44,7 @@ class CLI(object):
 
         Parameters:
             duckdb_path (str): The path to the DuckDB database.
-            model (str, optional): The model to use. Defaults to "duckdb-nsql" for "ollama" and "gpt-4" for "openai_chat".
+            model (str, optional): The model to use. Defaults to "llama3" for "ollama" and "gpt-4o" for "openai_chat".
             llm_type (str, optional): The type of language model to use. Defaults to "ollama". Other option is "openai_chat".
 
         Returns:
@@ -54,7 +55,7 @@ class CLI(object):
     def train(
         self,
         duckdb_path,
-        model="duckdb-nsql",
+        model="llama3",
         training_folder=str((Path(__file__).parent / "data").resolve()),
         llm_type="ollama",
     ):
@@ -65,7 +66,7 @@ class CLI(object):
 
         Parameters:
             duckdb_path (str): The path to the DuckDB database.
-            model (str, optional): The model to use. Defaults to 'duckdb-nsql'.
+            model (str, optional): The model to use. Defaults to 'llama3'.
             training_folder (str, optional): The path to the training folder. Defaults to 'data' directory in the current file's parent directory.
             llm_type (str, optional): The type of language model to use. Defaults to "ollama". Other option is "openai_chat".
 
@@ -87,6 +88,10 @@ def main():
     Returns:
         None
     """
+    # Custom helper message
+    if len(sys.argv) == 2 and ("-h" in sys.argv or "--help" in sys.argv):
+        sys.argv.remove("-h") if "-h" in sys.argv else sys.argv.remove("--help")
+
     fire.Fire(CLI)
 
 
