@@ -93,14 +93,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install poetry tox tox-gh-actions setuptools mike==1.1.2 mkdocs-material mkdocs-include-markdown-plugin mkdocstrings mkdocstrings-python
 
-      - name: build documentation
-        run: |
-          poetry install -E doc -E dev -E test
-          poetry run mkdocs build
-          git config --global user.name Docs deploy
-          git config --global user.email docs@dummy.bot.com
-          mike deploy -p -f --ignore "`poetry version --short`.dev"
-          mike set-default -p "`poetry version --short`.dev"
+      #- name: build documentation
+      #  run: |
+      #    poetry install -E doc -E dev -E test
+      #    poetry run mkdocs build
+      #    git config --global user.name Docs deploy
+      #    git config --global user.email docs@dummy.bot.com
+      #    mike deploy -p -f --ignore "`poetry version --short`.dev"
+      #    mike set-default -p "`poetry version --short`.dev"
 
       - name: Build wheels and source tarball
         run: |
