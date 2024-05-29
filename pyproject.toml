@@ -1,7 +1,7 @@
 [tool]
 [tool.poetry]
 name = "chatbgc"
-version = "0.1.1"
+version = "0.1.2"
 homepage = "https://github.com/NBChub/chatBGC"
 description = "Ask questions about biosynthetic gene clusters in your genome collection via LLMs usin RAG."
 authors = ["Matin Nuhamunada <matinnu@biosustain.dtu.dk>"]
