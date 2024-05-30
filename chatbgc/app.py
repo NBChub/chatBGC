@@ -75,7 +75,7 @@ def start_app(duckdb_path, model="llama3", llm_type="ollama"):
         vn,
         logo="https://raw.githubusercontent.com/NBChub/chatBGC/main/chatbgc/assets/bgcflow_logo.png",
         title="Welcome to chatBGC",
-        subtitle="Your AI-powered copilot for querying smBGCs in from BGCFlow run.",
+        subtitle="Your AI-powered copilot for querying genomes and BGC information from a BGCFlow run.",
         show_training_data=False,
         suggested_questions=False,
         sql=True,
