@@ -10,5 +10,13 @@
     {
         "question": "List all distinct BGC types in the dataset.",
         "sql": "SELECT DISTINCT product from regions;"
+    },
+    {
+        "question": "Are there any BGC regions that have multidrug resistance gene?",
+        "sql": "SELECT DISTINCT region_id FROM cdss WHERE product ILIKE '%multidrug resistance%';"
+    },
+    {
+        "question": "Are there type IV lanthipeptide BGCs in the dataset?",
+        "sql": "SELECT * FROM regions WHERE product ILIKE '%lanthipeptide-class-iv%';"
     }
 ]
