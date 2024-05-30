@@ -7,7 +7,7 @@
 </a>
 
 <a href="https://github.com/NBChub/chatBGC/actions">
-    <img src="https://github.com/NBChub/chatBGC/actions/workflows/main.yml/badge.svg?branch=release" alt="CI Status">
+    <img src="https://github.com/NBChub/chatBGC/actions/workflows/release.yml/badge.svg?branch=release" alt="CI Status">
 </a>
 
 <a href="https://nbchub.github.io/chatBGC/">
@@ -47,7 +47,7 @@ Replace `"your-api-key"` with the API key you generated on the OpenAI website.
 
 Follow these steps to install and run chatBGC:
 
-1. **Set up Ollama (Skip this step if you are using `OpenAI Chat`)**
+### 1. **Set up Ollama (Skip this step if you are using `OpenAI Chat`)**
 
     [Ollama](https://ollama.com/) is the default prerequisite for chatBGC. If you haven't installed it yet, you can do so using Docker:
 
@@ -58,8 +58,12 @@ Follow these steps to install and run chatBGC:
     docker exec -it ollama ollama run duckdb-nsql
     ```
 
-2. **Clone and install chatBGC**
-
+### 2. **Installing chatBGC**
+- Using Pip
+    ```bash
+    pip install git+https://github.com/NBChub/chatBGC.git
+    ```
+- From source
     Clone the chatBGC repository, navigate to the repository directory, and install the package using pip:
 
     ```bash
@@ -101,6 +105,9 @@ chatbgc run <path_to_duckdb>
 ```bash
 chatbgc run --llm_type openai_chat <path_to_duckdb>
 ```
+
+## Development guide (TO DO)
+- Create duckdb schema
 
 ## Credits
 
