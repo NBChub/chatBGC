@@ -77,6 +77,15 @@ class CLI(object):
             duckdb_path, model=model, training_folder=training_folder, llm_type=llm_type
         )
 
+    @staticmethod
+    def version():
+        """
+        Returns the version of the chatBGC package.
+        """
+        from . import __version__
+
+        return __version__
+
 
 def main():
     """
