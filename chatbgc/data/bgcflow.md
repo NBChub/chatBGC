@@ -97,10 +97,24 @@ molecule_type: Type of the molecule (e.g., DNA, RNA).
 topology: Topological description (e.g., linear, circular).
 seq: The DNA sequence.
 
-## Table: mibig_hits
-This table details matches to known biosynthetic gene clusters in MIBIG (Minimum Information about a Biosynthetic Gene cluster).
+## Table: mibig
+This table details all known biosynthetic gene clusters in MIBIG (Minimum Information about a Biosynthetic Gene cluster).
 
-bgc_id: Identifier for the biosynthetic gene cluster.
+mibig_id: Identifier for the biosynthetic gene cluster.
+biosyn_class: Biosynthesis classification.
+compounds: Compounds associated with the cluster.
+chem_acts: Chemical activities of the compounds.
+accession: Accession number.
+completeness: Completeness rating of the data.
+evidence: Evidence supporting the entry.
+organism_name: Name of the organism.
+ncbi_tax_id: NCBI taxonomy identifier.
+publications: Publications related to the cluster.
+
+## Table: mibig_hits
+This table details a subset of known biosynthetic gene clusters in MIBIG (Minimum Information about a Biosynthetic Gene cluster) with hits to the dataset.
+
+bgc_id: Identifier for the MIBIG biosynthetic gene cluster with hits to the dataset.
 product: Product type produced by the cluster.
 bigscape_class: Classification based on the BiG-SCAPE algorithm.
 biosyn_class: Biosynthesis classification.
@@ -125,6 +139,10 @@ end_pos: Ending position of the region.
 contig_edge: Boolean indicating if the region is at the edge of a contig.
 product: antiSMASH product associated with the region.
 region_length: Length of the region.
+most_similar_known_cluster_id: The id of the most similar MIBIG hits based on KnownClusterBlast
+most_similar_known_cluster_description: The description of the most similar MIBIG hits based on KnownClusterBlast
+most_similar_known_cluster_type: The biosynthetic gene cluster type of the most similar MIBIG hits based on KnownClusterBlast
+similarity: KnownClusterBlast score
 
 ## Table: genomes
 This table links genomes to their taxonomic information.
