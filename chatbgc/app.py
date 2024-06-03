@@ -88,5 +88,6 @@ def start_app(duckdb_path, model="llama3", llm_type="ollama"):
         followup_questions=True,
         summarization=True,
         allow_llm_to_see_data=True,
+        debug=False,
     )
     app.run()
