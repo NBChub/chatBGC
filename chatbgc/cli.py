@@ -3,6 +3,8 @@
 """Console script for chatbgc."""
 
 import logging
+import os
+import subprocess
 import sys
 from pathlib import Path
 
@@ -76,6 +78,34 @@ class CLI(object):
         train_model(
             duckdb_path, model=model, training_folder=training_folder, llm_type=llm_type
         )
+
+    def run_streamlit(self, duckdb_path, model="llama3", llm_type="ollama"):
+        """
+        Starts the chatBGC interface using the Streamlit.
+
+        The run method is used to start the chatBGC tool. It connects to a DuckDB database using the vanna.ai library and starts a Flask app.
+
+        Parameters:
+            duckdb_path (str): The path to the DuckDB database.
+            model (str, optional): The model to use. Defaults to "llama3" for "ollama" and "gpt-4o" for "openai_chat".
+            llm_type (str, optional): The type of language model to use. Defaults to "ollama". Other option is "openai_chat".
+
+        Returns:
+            None
+        """
+        # Set the environment variables
+        os.environ["CHATBGC_DUCKDB_PATH"] = duckdb_path
+        os.environ["CHATBGC_MODEL"] = model
+        os.environ["CHATBGC_LLM_TYPE"] = llm_type
+
+        # Get the directory of the current file
+        dir_path = Path(__file__).parent
+
+        # Construct the path to the streamlit_app.py file
+        streamlit_app_path = dir_path / "streamlit_app.py"
+
+        command = f"streamlit run {streamlit_app_path}"
+        subprocess.run(command, shell=True)
 
     @staticmethod
     def version():
