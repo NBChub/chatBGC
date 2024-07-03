@@ -1,0 +1,257 @@
+[
+  {
+    "id":0,
+    "question":"What are the different domain profiles available in the antiSMASH database?",
+    "sql":"SELECT * FROM antismash.as_domain_profiles;",
+    "answer":"The database contains 58 different domain profiles including Beta-eliminating lyase, various Condensation domains, Glycopeptide-specific NRPS domain, Heterocyclization domain, Epimerization domain, multiple Methyl transferase domains, Adenylation domains, Aminotransferase classes, Ketosynthase domain, Ketoreductase domain, Enoylreductase domain, Dehydrogenase domains, Acyltransferase domain, NRPS COM domains, Polyketide cyclase domains, PKS docking domains, Co-enzyme A ligase domain, Acyl-carrier protein domains, Male sterility protein, branching domain, Formylation domain, FkbH-like domain, GNAT domain, Halogenase domain, Pyran synthase domain, Fungal nonreducing product template domain, NRPS domains, and Phosphatidylglycerol lysyltransferase domain.",
+    "category":"General Information",
+    "difficulty":"Easy"
+  },
+  {
+    "id":1,
+    "question":"List all antiSMASH BGC categories and their descriptions.",
+    "sql":"SELECT * FROM antismash.bgc_categories;",
+    "answer":"There are seven BGC categories, including Polyketide (pks), Nonribosomal peptide (nrps), Ribosomally synthesized and post-translationally modified peptide (ripp), Terpene (terpene), Saccharide (saccharide), Alkaloid (alkaloid) and Other (other)",
+    "category":"General Information",
+    "difficulty":"Easy"
+  },
+  {
+    "id":2,
+    "question":"What are antiSMASH candidate types and their descriptions?",
+    "sql":"SELECT candidate_type_id, description FROM antismash.candidate_types;",
+    "answer":"AntiSMASH candidate types can be a Chemical hybrid, Interleaved, Neighbouring, or Single.",
+    "category":"General Information",
+    "difficulty":"Easy"
+  },
+  {
+    "id":3,
+    "question":"What kind of functional classes are in the antiSMASH database?",
+    "sql":"SELECT * FROM antismash.functional_classes;",
+    "answer":"There are six functional classes, where the functional class Biosynthetic_smcog and Bgc_seed having parent-child relationships with 'biosynthetic' functional class.",
+    "category":"General Information",
+    "difficulty":"Easy"
+  },
+  {
+    "id":4,
+    "question":"What is the GC content distribution of the DNA in the dataset?",
+    "sql":"SELECT accession, gc_content FROM antismash.sequence_gc_content WHERE accession = 'SEQ1234';",
+    "answer":"The GC content of the sequence with accession SEQ1234 is 45.67%.",
+    "category":"Sequences and Regions",
+    "difficulty":"Hard"
+  },
+  {
+    "id":5,
+    "question":"Which genome has the longest DNA sequence?",
+    "sql":"SELECT g.*, LENGTH(d.dna) as dna_length FROM antismash.genomes g JOIN antismash.dna_sequences d ON g.genome_id = d.genome_id ORDER BY LENGTH(d.dna) DESC LIMIT 1;",
+    "answer":"Genome NBC_01737 has the longest DNA sequence with a length of 13942900 base pairs.",
+    "category":"Sequences and Regions",
+    "difficulty":"Medium"
+  },
+  {
+    "id":6,
+    "question":"List all PKS regions in genome NBC_01737.",
+    "sql":"SELECT r.*, bt.*, g.*, rt.* FROM antismash.regions r JOIN antismash.dna_sequences d ON r.accession = d.accession JOIN antismash.genomes g ON d.genome_id = g.genome_id JOIN antismash.rel_regions_types rt ON r.region_id = rt.region_id JOIN antismash.bgc_types bt ON rt.bgc_type_id = bt.bgc_type_id WHERE g.assembly_id = 'NBC_01737' AND bt.term ILIKE '%PKS%';",
+    "answer": "The genome NBC_01737 contains 5 PKS regions with the following details:\n1. Region 1: Location [1505416:1546433], best hit loseolamycin A1/loseolamycin A2 with 68% similarity.\n2. Region 5: Location [5772447:5884359], best hit neoabyssomicin/abyssomicin with 28% similarity.\n3. Region 11: Location [8202310:8321183], best hit diazepinomicin with 75% similarity.\n4. Region 20: Location [11551477:11627322], best hit azinomycin B with 68% similarity.\n5. Region 21: Location [12318862:12465542], best hit BE-43547A1/A2/B1/B2/B3/C1/C2 with 30% similarity.",
+    "category":"Sequences and Regions",
+    "difficulty":"Hard"
+  },
+  {
+    "id":7,
+    "question":"What are the available antiSMASH domain subtypes and their descriptions?",
+    "sql":"SELECT * FROM antismash.as_domain_subtypes;",
+    "answer":"The available antiSMASH domain subtypes are: Condensation_LCL, Trans-AT-KS, Iterative-KS, Condensation_Starter, Condensation_Dual, Hybrid-KS, cMT, Modular-KS, oMT, Polyketide_cyc2, Polyketide_cyc, nMT, Condensation_DCL, Cglyc, AA, Enediyne-KS, lacST, beta-OH, non-elongating-DB, ST, br, alphaMe, alphaMe-eDB, Miscellaneous, beta-D-OMe, non-elongating-beta-OH, DB, alphaMe-DB, beta-Me, beta-D-OH, exomethylene, eDB, keto, beta-OH/keto, red/shDB, beta-L-OH, and beta-OH/eDB. Descriptions are not provided for these subtypes.",
+    "category":"Relationships and References",
+    "difficulty":"Easy"
+  },
+  {
+    "id":8,
+    "question":"Which candidates are associated with a specific module?",
+    "sql":"SELECT * FROM antismash.rel_candidates_modules WHERE module_id = 1;",
+    "answer":"Module 1 is associated with candidates such as Candidate 1 and Candidate 2.",
+    "category":"Relationships and References",
+    "difficulty":"Medium"
+  },
+  {
+    "id":9,
+    "question":"What are the details of the protoclusters associated with a specific candidate?",
+    "sql":"SELECT * FROM antismash.rel_candidates_protoclusters WHERE candidate_id = 1;",
+    "answer":"Candidate 1 is associated with protoclusters such as Protocluster 1 and Protocluster 2.",
+    "category":"Relationships and References",
+    "difficulty":"Medium"
+  },
+  {
+    "id":10,
+    "question":"Which domains are linked to a particular substrate?",
+    "sql":"SELECT * FROM antismash.rel_as_domains_substrates WHERE substrate_id = 1;",
+    "answer":"Substrate 1 is linked to multiple domains, including Domain A and Domain B.",
+    "category":"Relationships and References",
+    "difficulty":"Medium"
+  },
+  {
+    "id":11,
+    "question":"What are the details of a specific gene identified by its locus tag?",
+    "sql":"SELECT * FROM antismash.genes WHERE locus_tag = 'LOC1234';",
+    "answer":"The gene with locus tag LOC1234 has details including location, region ID, and associated functional classes.",
+    "category":"Gene and Protein Information",
+    "difficulty":"Medium"
+  },
+  {
+    "id":12,
+    "question":"What profiles hit a specific CDS and what are their details?",
+    "sql":"SELECT * FROM antismash.profile_hits WHERE cds_id = 1;",
+    "answer":"CDS 1 is hit by profiles including Profile A and Profile B with specific evalues and bit scores.",
+    "category":"Gene and Protein Information",
+    "difficulty":"Medium"
+  },
+  {
+    "id":13,
+    "question":"List all pfam domains associated with a specific CDS.",
+    "sql":"SELECT * FROM antismash.pfam_domains WHERE cds_id = 1;",
+    "answer":"CDS 1 is associated with pfam domains such as Pfam Domain A and Pfam Domain B.",
+    "category":"Gene and Protein Information",
+    "difficulty":"Medium"
+  },
+  {
+    "id":14,
+    "question":"What tigrfam domains are related to a specific CDS?",
+    "sql":"SELECT * FROM antismash.tigrfam_domains WHERE cds_id = 1;",
+    "answer":"CDS 1 is related to tigrfam domains including Tigrfam Domain A and Tigrfam Domain B.",
+    "category":"Gene and Protein Information",
+    "difficulty":"Medium"
+  },
+  {
+    "id":15,
+    "question":"List all clusters and their types for a given region.",
+    "sql":"SELECT * FROM antismash.rel_regions_types WHERE region_id = 1;",
+    "answer":"Region 1 contains clusters of types such as BGC Type A and BGC Type B.",
+    "category":"Cluster and Candidate Information",
+    "difficulty":"Medium"
+  },
+  {
+    "id":16,
+    "question":"What are the candidates identified in a specific region and their details?",
+    "sql":"SELECT * FROM antismash.candidates WHERE region_id = 1;",
+    "answer":"Region 1 has candidates such as Candidate A and Candidate B with specific locations and types.",
+    "category":"Cluster and Candidate Information",
+    "difficulty":"Medium"
+  },
+  {
+    "id":17,
+    "question":"What are the products of a specific t2pks and their properties?",
+    "sql":"SELECT * FROM antismash.t2pks_products WHERE t2pks_id = 1;",
+    "answer":"T2PKS 1 produces products such as Product A and Product B with various functions and properties.",
+    "category":"Cluster and Candidate Information",
+    "difficulty":"Hard"
+  },
+  {
+    "id":18,
+    "question":"Which SMCOGs are associated with a specific functional class?",
+    "sql":"SELECT * FROM antismash.smcogs WHERE functional_class_id = 1;",
+    "answer":"Functional Class 1 is associated with SMCOGs such as SMCOG A and SMCOG B.",
+    "category":"Functional Class and Regulator Information",
+    "difficulty":"Medium"
+  },
+  {
+    "id":19,
+    "question":"What are the details of all regulators and their confidences?",
+    "sql":"SELECT * FROM antismash.regulators;",
+    "answer":"The database contains regulators such as Regulator A and Regulator B with specific descriptions and confidence levels.",
+    "category":"Functional Class and Regulator Information",
+    "difficulty":"Medium"
+  },
+  {
+    "id":20,
+    "question":"What binding sites are linked to a specific regulator and their details?",
+    "sql":"SELECT * FROM antismash.binding_sites WHERE regulator_id = 1;",
+    "answer":"Regulator 1 is linked to binding sites such as Binding Site A and Binding Site B with specific scores and locations.",
+    "category":"Functional Class and Regulator Information",
+    "difficulty":"Medium"
+  },
+  {
+    "id":21,
+    "question":"Summarize all taxa of the genomes and their details.",
+    "sql":"SELECT t.* FROM antismash.taxa t JOIN antismash.genomes g ON t.tax_id = g.tax_id;",
+    "answer":"The data contains 1032 entries of bacterial genomes, all classified under the superkingdom 'Bacteri' and the phylum 'Actinomycetota' with the majority being unclassified at the kingdom level. The data spans multiple orders within the class 'Actinomycetes' primarily 'Kitasatosporales' and 'Micromonosporales'. The family 'Streptomycetaceae' and genus 'Streptomyces' are most frequent, with many species and strains listed as unclassified. Other notable genera include 'Micromonospora', 'Nocardia', 'Kitasatospora', and 'Amycolatopsis'. The species 'albidoflavus', 'virginiae', 'microflavus', and 'jietaisiensis' frequently appear.",
+    "category":"Taxonomy and Genomics",
+    "difficulty":"Medium"
+  },
+  {
+    "id":22,
+    "question":"How many Streptomyces genomes are in the dataset?",
+    "sql":"SELECT COUNT(*) FROM antismash.genomes g JOIN antismash.taxa t ON g.tax_id = t.tax_id WHERE t.genus = 'Streptomyces';",
+    "answer":"There are 880 Streptomyces genomes in the dataset.",
+    "category":"Taxonomy and Genomics",
+    "difficulty":"Medium"
+  },
+  {
+    "id":23,
+    "question":"What isolates are linked to a specific sample?",
+    "sql":"SELECT * FROM antismash.isolates WHERE sample_id = 1;",
+    "answer":"Sample 1 is linked to isolates such as Isolate A and Isolate B.",
+    "category":"Taxonomy and Genomics",
+    "difficulty":"Medium"
+  },
+  {
+    "id":24,
+    "question":"Find all lanthipeptide bgc type regions.",
+    "sql":"SELECT r.*, bt.* FROM antismash.rel_regions_types rrt JOIN antismash.bgc_types bt ON rrt.bgc_type_id = bt.bgc_type_id JOIN antismash.regions r ON rrt.region_id = r.region_id WHERE bt.description ILIKE '%lanthipeptide%';",
+    "answer":"BGC Type 1 is found in regions such as Region A and Region B.",
+    "category":"Search and Filtering",
+    "difficulty":"Medium"
+  },
+  {
+    "id":25,
+    "question":"What are the genes located in a particular region?",
+    "sql":"SELECT * FROM antismash.genes WHERE region_id = 1;",
+    "answer":"Region 1 contains genes such as Gene A and Gene B.",
+    "category":"Search and Filtering",
+    "difficulty":"Medium"
+  },
+  {
+    "id":26,
+    "question":"Which CDSs are located in a specific region and what are their details?",
+    "sql":"SELECT * FROM antismash.cdss WHERE region_id = 1;",
+    "answer":"Region 1 contains CDSs such as CDS A and CDS B with specific locus tags and product information.",
+    "category":"Search and Filtering",
+    "difficulty":"Medium"
+  },
+  {
+    "id":27,
+    "question":"Which comparippson hits are associated with a specific MIBIG reference?",
+    "sql":"SELECT * FROM antismash.comparippson_hits WHERE comparippson_mibig_id = 1;",
+    "answer":"MIBIG Reference 1 is associated with comparippson hits such as Hit A and Hit B.",
+    "category":"Advanced Queries",
+    "difficulty":"Hard"
+  },
+  {
+    "id":28,
+    "question":"What are the cluster blast hits for a specific region?",
+    "sql":"SELECT * FROM antismash.clusterblast_hits WHERE region_id = 1;",
+    "answer":"Region 1 has cluster blast hits including Hit A and Hit B with specific descriptions and similarities.",
+    "category":"Advanced Queries",
+    "difficulty":"Hard"
+  },
+  {
+    "id":29,
+    "question":"List all TTA codons and their locations in a specific sequence.",
+    "sql":"SELECT * FROM antismash.tta_codons WHERE seq_id = 'SEQ1234';",
+    "answer":"Sequence SEQ1234 contains TTA codons at various locations including Location A and Location B.",
+    "category":"Advanced Queries",
+    "difficulty":"Hard"
+  },
+  {
+    "id":30,
+    "question":"List all regions with a best MIBiG hit description containing 'neoabyssomicin'.",
+    "sql":"SELECT * FROM antismash.regions WHERE best_mibig_hit_description ILIKE '%neoabyssomicin%';",
+    "answer":"There are 30 regions with a best MIBiG hit description containing 'neoabyssomicin'.",
+    "category":"Sequences and Regions",
+    "difficulty":"Easy"
+  },
+  {
+    "id":31,
+    "question":"Get me all genomes and regions containing domains where the domain subtype is 'Trans-AT-KS'.",
+    "sql":"SELECT g.*, r.*, ad.*, radts.subtype FROM antismash.regions r JOIN antismash.as_domains ad ON r.region_id = ad.region_id JOIN antismash.rel_as_domain_to_subtype radts ON ad.as_domain_id = radts.as_domain_id JOIN antismash.dna_sequences ds ON r.accession = ds.accession JOIN antismash.genomes g ON ds.genome_id = g.genome_id WHERE radts.subtype = 'Trans-AT-KS';",
+    "answer":"The data consists of 75 entries from various genomes and regions containing domains where the domain subtype is 'Trans-AT-KS'. Key details include:\n- Multiple entries come from genomes with IDs 648, 578, 269, and 246.\n- Regions vary significantly in their start and end positions.\n- The best MIBiG hits include various secondary metabolites such as ebelactone, matlystatin A, and albaflavenone, with similarities ranging from 2% to 100%.",
+    "difficulty": "Hard"
+  }
+]
