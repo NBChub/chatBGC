@@ -58,7 +58,7 @@ class CLI(object):
         self,
         duckdb_path,
         model="llama3",
-        training_folder=str((Path(__file__).parent / "data/bgcflow").resolve()),
+        training_folder=str((Path(__file__).parent / "data/").resolve()),
         llm_type="ollama",
     ):
         """

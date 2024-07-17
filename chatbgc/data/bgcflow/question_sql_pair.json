@@ -2,7 +2,7 @@
   {
     "id":0,
     "question":"How many gene cluster families are in the dataset?",
-    "sql":"SELECT COUNT(DISTINCT gcf) FROM bigscape_cluster;",
+    "sql":"SELECT COUNT(DISTINCT gcf) FROM bgcflow.bigscape_cluster;",
     "answer":null,
     "category":null,
     "difficulty":null
@@ -10,7 +10,7 @@
   {
     "id":1,
     "question":"What is the average genome completeness for genomes with a contamination less than 5%?",
-    "sql":"SELECT AVG(completeness) FROM checkm WHERE contamination < 0.05;",
+    "sql":"SELECT AVG(completeness) FROM bgcflow.checkm WHERE contamination < 0.05;",
     "answer":null,
     "category":null,
     "difficulty":null
@@ -18,7 +18,7 @@
   {
     "id":2,
     "question":"List all distinct BGC types in the dataset.",
-    "sql":"SELECT DISTINCT product from regions;",
+    "sql":"SELECT DISTINCT product FROM bgcflow.regions;",
     "answer":null,
     "category":null,
     "difficulty":null
@@ -26,7 +26,7 @@
   {
     "id":3,
     "question":"Are there any BGC regions that have multidrug resistance gene?",
-    "sql":"SELECT DISTINCT region_id FROM cdss WHERE product ILIKE '%multidrug resistance%';",
+    "sql":"SELECT DISTINCT region_id FROM bgcflow.cdss WHERE product ILIKE '%multidrug resistance%';",
     "answer":null,
     "category":null,
     "difficulty":null
@@ -34,7 +34,7 @@
   {
     "id":4,
     "question":"Are there type IV lanthipeptide BGCs in the dataset?",
-    "sql":"SELECT * FROM regions WHERE product ILIKE '%lanthipeptide-class-iv%';",
+    "sql":"SELECT * FROM bgcflow.regions WHERE product ILIKE '%lanthipeptide-class-iv%';",
     "answer":null,
     "category":null,
     "difficulty":null
@@ -42,7 +42,7 @@
   {
     "id":5,
     "question":"Do we have Kirromycin producing strains?",
-    "sql":"SELECT DISTINCT genome_id FROM regions WHERE most_similar_known_cluster_description ILIKE '%Kirromycin%';",
+    "sql":"SELECT DISTINCT genome_id FROM bgcflow.regions WHERE most_similar_known_cluster_description ILIKE '%Kirromycin%';",
     "answer":null,
     "category":null,
     "difficulty":null
@@ -50,7 +50,7 @@
   {
     "id":6,
     "question":"What are the most frequently occurring MIBIG hits compound in the dataset?",
-    "sql":"SELECT compounds, COUNT(*) AS count FROM mibig_hits GROUP BY compounds ORDER BY count DESC;",
+    "sql":"SELECT compounds, COUNT(*) AS count FROM bgcflow.mibig_hits GROUP BY compounds ORDER BY count DESC;",
     "answer":null,
     "category":null,
     "difficulty":null
@@ -58,7 +58,7 @@
   {
     "id":7,
     "question":"What is the distribution of different genera in the dataset?",
-    "sql":"SELECT genus, COUNT(*) AS count FROM taxa GROUP BY genus ORDER BY count DESC;",
+    "sql":"SELECT genus, COUNT(*) AS count FROM bgcflow.taxa GROUP BY genus ORDER BY count DESC;",
     "answer":null,
     "category":null,
     "difficulty":null
@@ -66,7 +66,7 @@
   {
     "id":8,
     "question":"Can you list all entries that belong to unknown GCFs?",
-    "sql":"SELECT * FROM bigscape_cluster WHERE FAM_TYPE = 'unknown_family';",
+    "sql":"SELECT * FROM bgcflow.bigscape_cluster WHERE FAM_TYPE = 'unknown_family';",
     "answer":null,
     "category":null,
     "difficulty":null
@@ -74,7 +74,7 @@
   {
     "id":9,
     "question":"Can you list all BGCs in the GCFs that are associated with melanin compounds?",
-    "sql":"SELECT * FROM bigscape_cluster WHERE fam_known_compounds ILIKE '%melanin%';",
+    "sql":"SELECT * FROM bgcflow.bigscape_cluster WHERE fam_known_compounds ILIKE '%melanin%';",
     "answer":null,
     "category":null,
     "difficulty":null
@@ -82,7 +82,7 @@
   {
     "id":10,
     "question":"how many BGCs are complete (not the edge of a contig)?",
-    "sql":"SELECT region_id, genome_id FROM regions WHERE contig_edge = FALSE;",
+    "sql":"SELECT region_id, genome_id FROM bgcflow.regions WHERE contig_edge = FALSE;",
     "answer":null,
     "category":null,
     "difficulty":null
