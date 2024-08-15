@@ -48,24 +48,44 @@ def train_model(
 
     vn.connect_to_duckdb(url=duckdb_path)
 
-    for folder in Path(training_folder).glob("*"):
-        for file in folder.glob("*"):
-            if file.suffix == ".sql":
-                with open(file, "r") as f:
+    logging.info(f"Training on DDL and documentation files in {training_folder}...")
+    for path_item in Path(training_folder).glob("*"):
+        if path_item.is_file():
+            if path_item.suffix == ".sql":
+                with open(path_item, "r") as f:
                     ddl = f.read()
                 vn.train(ddl=ddl)
-                logging.info(f"Trained on DDL file: {file}")
-            elif file.suffix == ".md":
-                with open(file, "r") as f:
+                logging.info(f"Trained on DDL file: {path_item}")
+            elif path_item.suffix == ".md":
+                with open(path_item, "r") as f:
                     docs = f.read()
                 vn.train(documentation=docs)
-                logging.info(f"Trained on documentation file: {file}")
-            elif file.suffix == ".json":
-                with open(file, "r") as f:
+                logging.info(f"Trained on documentation file: {path_item}")
+            elif path_item.suffix == ".json":
+                with open(path_item, "r") as f:
                     data = json.load(f)
-                for item in data:
-                    vn.train(question=item["question"], sql=item["sql"])
-                logging.info(f"Trained on question-sql pair: {file}")
+                for path_item in data:
+                    vn.train(question=path_item["question"], sql=path_item["sql"])
+                    logging.info(f"Trained on question-sql pair: {path_item}")
+
+        elif path_item.is_dir():
+            for file in path_item.glob("*"):
+                if file.suffix == ".sql":
+                    with open(file, "r") as f:
+                        ddl = f.read()
+                    vn.train(ddl=ddl)
+                    logging.info(f"Trained on DDL file: {file}")
+                elif file.suffix == ".md":
+                    with open(file, "r") as f:
+                        docs = f.read()
+                    vn.train(documentation=docs)
+                    logging.info(f"Trained on documentation file: {file}")
+                elif file.suffix == ".json":
+                    with open(file, "r") as f:
+                        data = json.load(f)
+                    for path_item in data:
+                        vn.train(question=path_item["question"], sql=path_item["sql"])
+                    logging.info(f"Trained on question-sql pair: {file}")
 
     # Get the information schema query
     df_information_schema = vn.run_sql("SELECT * FROM INFORMATION_SCHEMA.COLUMNS")
